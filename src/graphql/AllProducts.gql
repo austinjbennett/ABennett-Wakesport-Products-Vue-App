@@ -1,0 +1,10 @@
+query allProducts($searchString: String) {
+	Products(searchString: $searchString) {
+		id
+		name
+		category
+		description
+		price
+		imageUrl
+	}
+}
