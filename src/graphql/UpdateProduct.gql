@@ -1,0 +1,14 @@
+mutation updateProduct($id: String!, $name: String, $category: String, $description: String, $price: Int, $imageUrl: String) {
+    updateOneProduct(where:
+    { id: $id },
+        data: {
+            name: $name
+            category: $category
+            description: $description
+            price: $price
+            imageUrl: $imageUrl
+        }
+    ) {
+        id
+    }
+}

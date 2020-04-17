@@ -1,0 +1,14 @@
+mutation addProduct($name: String!, $category: String!, $description: String!, $price: Int!, $imageUrl: String!) {
+    createOneProduct(
+        data: {
+            name: $name
+            category: $category
+            description: $description
+            price: $price
+            imageUrl: $imageUrl
+        }
+    ) {
+        id
+        name
+    }
+}

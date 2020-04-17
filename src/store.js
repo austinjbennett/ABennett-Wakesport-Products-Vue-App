@@ -5,11 +5,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
 	state: {
+		editingProduct: null,
 	},
 	mutations: {
+		editProduct(state, product) {
+			state.editingProduct = product;
+		},
 	},
 	actions: {
-	},
-	modules: {
+		editProduct(context, product) {
+			context.commit('editProduct', product);
+		},
 	},
 });

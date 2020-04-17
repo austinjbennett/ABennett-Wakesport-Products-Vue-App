@@ -33,7 +33,8 @@
 			<div v-else-if="data" class="result apollo">
 				<v-row>
 					<v-col cols="12" sm="6" md="4" lg="3" xl="2" v-for="(product, i) in data.Products" :key="i" >
-						<v-card class="mx-auto" max-width="350">
+						<v-card class="mx-auto" max-width="350" link @click="editProduct(product)">
+							<p class="text-center">Click To Edit</p>
 							<v-img :src="product.imageUrl"></v-img>
 							<v-card-text>
 								<div>{{ product.title }}</div>
@@ -72,7 +73,8 @@
 			<div v-else-if="data" class="result apollo">
 				<v-row>
 					<v-col cols="12" sm="6" md="4" lg="3" xl="2" v-for="(product, i) in data.Category" :key="i" >
-						<v-card class="mx-auto" max-width="350">
+						<v-card class="mx-auto" max-width="350" link @click="editProduct(product)">
+							<p class="text-center">Click To Edit</p>
 							<v-img :src="product.imageUrl"></v-img>
 							<v-card-text>
 								<div>{{ product.title }}</div>
@@ -118,6 +120,12 @@ export default {
 			category: '',
 			type: 'search',
 		};
+	},
+	methods: {
+		editProduct(product) {
+			this.$store.dispatch('editProduct', product);
+			this.$router.push(`/product/${product.id}`);
+		},
 	},
 };
 </script>

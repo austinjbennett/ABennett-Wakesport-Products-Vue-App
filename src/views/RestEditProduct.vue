@@ -11,6 +11,7 @@
 							<v-textarea class="text--primary" v-model="product.description" label="Description"></v-textarea>
 							<v-text-field v-model="product.price" prefix="$" label="Price"></v-text-field>
 							<v-text-field v-model="product.imageUrl" label="Image URL"></v-text-field>
+							<v-btn color="secondary" class="mr-6" @click="returnHome">Cancel</v-btn>
 							<v-btn type="submit" color="primary">Commit Changes</v-btn>
 						</v-form>
 					</v-card-text>
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
 	name: 'RestProduct.vue',
 	data() {
@@ -30,20 +33,33 @@ export default {
 		};
 	},
 	methods: {
-		async updateProduct() {
-			const response = await fetch('http://localhost:5000/api/edit-product', {
+		updateProduct() {
+			console.log('this.product._id', this.product._id);
+			console.log('stringified product:', JSON.stringify(this.product));
+			// fetch('http://localhost:5000/api/edit-product', {
+			axios({
 				method: 'PUT',
+				// url: `http://localhost:5000/api/edit-product?id=${this.product._id}&title=${this.product.title}&description=${this.product.description}&category=${this.product.category}&price=${this.product.price}&imageUrl=${this.product.imageUrl}`,
+				url: 'http://localhost:5000/api/edit-product',
 				headers: {
-					'Content-Type': 'application/json;charset=utf-8',
+					'Content-Type': 'application/x-www-form-urlencoded',
 				},
-				body: JSON.stringify(this.product),
-			});
-			console.log('fetch put:', response);
+				data: this.product,
+			})
+				// .then((response) => {
+				// 	return response.json();
+				// })
+				.then((data) => {
+					console.log('fetch put:', data);
+				})
+				.catch((err) => {
+					console.error('Error PUTing:', err);
+				});
 			// this.$router.push('/');
 		},
 	},
 	beforeMount() {
-		fetch(`http://localhost:5000/api/product/${this.productId}`)
+		fetch(`https://abennett-crud-server.herokuapp.com/api/product/${this.productId}`)
 			.then((response) => {
 				return response.json();
 			})

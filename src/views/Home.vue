@@ -23,7 +23,7 @@
 	</v-row>
 	<v-row v-else>
 		<v-col cols="12" sm="6" md="4" lg="3" xl="2" v-for="(product, i) in products" :key="i">
-			<router-link :to="'/product/' + product._id" class="product-card" link>
+			<router-link :to="'/restProduct/' + product._id" class="product-card" link>
 			<v-card class="mx-auto product-card" max-width="350" link>
 				<p class="text-center">Click To Edit</p>
 				<v-img :src="product.imageUrl"></v-img>
@@ -74,14 +74,17 @@ export default {
 	},
 	methods: {
 		getProducts() {
-			fetch('https://abennett-crud-server.herokuapp.com/api/products').then((response) => {
-			// fetch('http://localhost:5000/api/products').then((response) => {
-				return response.json();
-			}).then((data) => {
-				this.products = data;
-			}).catch((err) => {
-				console.error('Error getting products from REST API:', err);
-			});
+			fetch('https://abennett-crud-server.herokuapp.com/api/products')
+			// fetch('http://localhost:5000/api/products')
+				.then((response) => {
+					return response.json();
+				})
+				.then((data) => {
+					this.products = data;
+				})
+				.catch((err) => {
+					console.error('Error getting products from REST API:', err);
+				});
 		},
 	},
 	beforeMount() {
@@ -90,7 +93,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 	.product-card {
 		text-decoration: none !important;
 	}

@@ -1,0 +1,10 @@
+query singleProduct($id: String) {
+	Product(id: "ck8atgsrx0007kr7b3w3azya1") {
+		id
+		name
+		category
+		description
+		price
+		imageUrl
+	}
+}

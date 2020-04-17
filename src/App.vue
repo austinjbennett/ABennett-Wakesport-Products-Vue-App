@@ -13,17 +13,17 @@
 						<v-icon>mdi-login</v-icon>
 					</v-list-item-icon>
 					<v-list-item-content>
-						<v-list-item-title>Home</v-list-item-title>
+						<v-list-item-title>REST Home</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
 			</router-link>
-			<router-link class="routerLink" to="/admin">
+			<router-link class="routerLink" to="/restAdd">
 				<v-list-item link>
 					<v-list-item-icon class="mr-2">
 						<v-icon>mdi-login</v-icon>
 					</v-list-item-icon>
 					<v-list-item-content>
-						<v-list-item-title>Admin</v-list-item-title>
+						<v-list-item-title>REST Add Product</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
 			</router-link>
@@ -37,13 +37,13 @@
 					</v-list-item-content>
 				</v-list-item>
 			</router-link>
-			<router-link class="routerLink" to="/graphqlAdmin">
+			<router-link class="routerLink" to="/graphqlAdd">
 				<v-list-item link>
 					<v-list-item-icon class="mr-2">
 						<v-icon>mdi-login</v-icon>
 					</v-list-item-icon>
 					<v-list-item-content>
-						<v-list-item-title>GraphQL Admin</v-list-item-title>
+						<v-list-item-title>GraphQL Add Product</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
 			</router-link>
@@ -70,3 +70,9 @@ export default {
 	}),
 };
 </script>
+
+<style scoped>
+	.routerLink {
+		text-decoration: none !important;
+	}
+</style>

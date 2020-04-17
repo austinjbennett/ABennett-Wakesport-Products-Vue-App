@@ -2,9 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from './views/Home.vue';
 import RestEditProduct from './views/RestEditProduct.vue';
-import Admin from './views/Admin.vue';
+import RestAdd from './views/RestAdd.vue';
 import GraphQL from './views/GraphQL.vue';
-import GraphQLAdmin from './views/GraphQLAdmin.vue';
+import GraphQLEditProduct from './views/GraphQLEditProduct.vue';
+import GraphQLAdd from './views/GraphQLAdd.vue';
 
 Vue.use(VueRouter);
 
@@ -15,14 +16,14 @@ const routes = [
 		component: Home,
 	},
 	{
-		path: '/product/:productId',
-		name: 'Product Page',
+		path: '/restProduct/:productId',
+		name: 'REST Product Page',
 		component: RestEditProduct,
 	},
 	{
-		path: '/admin',
-		name: 'REST Admin',
-		component: Admin,
+		path: '/restAdd',
+		name: 'REST Add',
+		component: RestAdd,
 	},
 	{
 		path: '/graphql',
@@ -30,9 +31,14 @@ const routes = [
 		component: GraphQL,
 	},
 	{
-		path: '/graphqlAdmin',
-		name: 'GraphQL Admin',
-		component: GraphQLAdmin,
+		path: '/product/:productId',
+		name: 'Product Page',
+		component: GraphQLEditProduct,
+	},
+	{
+		path: '/graphqlAdd',
+		name: 'GraphQL Add Product',
+		component: GraphQLAdd,
 	},
 
 ];
