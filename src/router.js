@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from './views/Home.vue';
+import RestEditProduct from './views/RestEditProduct.vue';
 import Admin from './views/Admin.vue';
 import GraphQL from './views/GraphQL.vue';
 import GraphQLAdmin from './views/GraphQLAdmin.vue';
@@ -12,6 +13,11 @@ const routes = [
 		path: '/',
 		name: 'Home',
 		component: Home,
+	},
+	{
+		path: '/product/:productId',
+		name: 'Product Page',
+		component: RestEditProduct,
 	},
 	{
 		path: '/admin',

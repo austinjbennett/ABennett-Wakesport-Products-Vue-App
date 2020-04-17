@@ -1,0 +1,10 @@
+query productCategory($category: String) {
+	Category(category: $category) {
+		id
+		name
+		category
+		description
+		price
+		imageUrl
+	}
+}
