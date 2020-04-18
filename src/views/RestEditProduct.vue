@@ -58,8 +58,8 @@ export default {
 				.then((response) => {
 					return response.json();
 				})
-				.then((data) => {
-					console.log('fetch put:', data);
+				.then(() => {
+					//
 				})
 				.catch((err) => {
 					console.error('Error PUTing:', err);

@@ -118,7 +118,7 @@ export default {
 	methods: {
 		editProduct(product) {
 			this.$store.dispatch('editProduct', product);
-			this.$router.push(`/product/${product.id}`);
+			this.$router.push(`/graphqlProduct/${product.id}`);
 		},
 	},
 };

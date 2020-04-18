@@ -31,7 +31,7 @@ const routes = [
 		component: GraphQL,
 	},
 	{
-		path: '/product/:productId',
+		path: '/graphqlProduct/:productId',
 		name: 'Product Page',
 		component: GraphQLEditProduct,
 	},
