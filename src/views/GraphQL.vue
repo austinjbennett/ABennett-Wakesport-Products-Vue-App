@@ -62,7 +62,6 @@
 	>
 		Categories
 		<template slot-scope="{ result: { loading, error, data } }">
-<!--			<div>{{data}}</div>-->
 			<!-- Loading -->
 			<div v-if="loading" class="loading apollo">Loading...</div>
 
@@ -102,11 +101,6 @@
 <script>
 export default {
 	name: 'GraphQL',
-
-	components: {
-		//
-	},
-
 	data() {
 		return {
 			filterType: 'search',

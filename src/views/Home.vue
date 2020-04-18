@@ -3,16 +3,6 @@
 	<h4>This is the Home View viewing products using my node.js and express RESTful API</h4>
 	<v-row>
 		<v-col cols="4">
-			<p>Filter by:</p>
-			<v-radio-group v-model="filterType">
-				<v-radio label="Search Term" value="search">Search Term</v-radio>
-				<v-radio label="Category" value="category">Category</v-radio>
-			</v-radio-group>
-		</v-col>
-		<v-col cols="4">
-			<v-text-field label="Search" v-model="searchString"></v-text-field>
-		</v-col>
-		<v-col cols="4">
 			<v-select :items="categories" label="Select a Category" v-model="category"></v-select>
 		</v-col>
 	</v-row>
@@ -49,21 +39,19 @@
 
 export default {
 	name: 'Home',
-	components: {
-		//
-	},
 	data() {
 		return {
 			products: [],
 			filterType: 'search',
 			searchString: '',
 			categories: [
+				'All',
 				'Wakeboards',
 				'Wakeboard Bindings',
 				'Life Jackets',
 				'Wakesurf Boards',
 			],
-			category: '',
+			category: 'All',
 			type: 'search',
 		};
 	},
@@ -74,17 +62,34 @@ export default {
 	},
 	methods: {
 		getProducts() {
-			fetch('https://abennett-crud-server.herokuapp.com/api/products')
-			// fetch('http://localhost:5000/api/products')
-				.then((response) => {
-					return response.json();
-				})
-				.then((data) => {
-					this.products = data;
-				})
-				.catch((err) => {
-					console.error('Error getting products from REST API:', err);
-				});
+			if (this.category === 'All') {
+				fetch('https://abennett-crud-server.herokuapp.com/api/products')
+					.then((response) => {
+						return response.json();
+					})
+					.then((data) => {
+						this.products = data;
+					})
+					.catch((err) => {
+						console.error('Error getting products from REST API:', err);
+					});
+			} else {
+				fetch(`https://abennett-crud-server.herokuapp.com/api/products/category/${this.category}`)
+					.then((response) => {
+						return response.json();
+					})
+					.then((data) => {
+						this.products = data;
+					})
+					.catch((err) => {
+						console.error('Error getting products by Category from REST API:', err);
+					});
+			}
+		},
+	},
+	watch: {
+		category() {
+			this.getProducts();
 		},
 	},
 	beforeMount() {

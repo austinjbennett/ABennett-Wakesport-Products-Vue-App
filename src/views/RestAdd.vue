@@ -8,8 +8,8 @@
 					<v-card-text>
 						<v-form @submit.prevent="addProduct">
 							<v-text-field v-model="product.title" label="Title"></v-text-field>
-							<v-text-field class="courseName" v-model="product.productCategory" label="Category"></v-text-field>
-							<v-textarea class="text--primary" v-model="product.description" label="Description"></v-textarea>
+							<v-select :items="categories" label="Category" v-model="product.productCategory"></v-select>
+							<v-textarea v-model="product.description" label="Description"></v-textarea>
 							<v-text-field v-model="product.price" prefix="$" label="Price"></v-text-field>
 							<v-text-field v-model="product.imageUrl" label="Image URL"></v-text-field>
 							<v-btn color="secondary" class="mr-6" @click="returnHome">Cancel</v-btn>
@@ -27,17 +27,44 @@
 <script>
 export default {
 	name: 'RESTAddProduct',
-
-	components: {
-		//
-	},
-
 	data: () => ({
 		product: {},
+		categories: [
+			'Wakeboards',
+			'Wakeboard Bindings',
+			'Life Jackets',
+			'Wakesurf Boards',
+		],
 	}),
 	methods: {
 		addProduct() {
-			//
+			const payload = {
+				title: this.product.title,
+				productCategory: this.product.productCategory,
+				description: this.product.description,
+				price: parseInt(this.product.price, 10),
+				imageUrl: this.product.imageUrl,
+			};
+			fetch('https://abennett-crud-server.herokuapp.com/api/add-product', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8',
+				},
+				body: JSON.stringify(payload),
+			})
+				.then((response) => {
+					return response.json();
+				})
+				.then((data) => {
+					console.log('fetch put:', data);
+				})
+				.catch((err) => {
+					console.error('Error PUTing:', err);
+				});
+			this.$router.push('/');
+		},
+		returnHome() {
+			this.$router.push('/');
 		},
 	},
 };

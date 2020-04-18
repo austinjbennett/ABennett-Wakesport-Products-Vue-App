@@ -9,13 +9,14 @@
 			price: sendPrice,
 			imageUrl: product.imageUrl,
 		}"
-		@done="onDone"
+		@done="returnHome"
 	>
 		<template v-slot="{ mutate, loading, error }">
 			<v-container>
 				<v-row>
 					<v-col>
 						<v-card class="mx-auto" max-width="900">
+							<v-img :src="product.imageUrl" max-height="200" contain></v-img>
 							<v-card-text>
 								<v-form @submit.prevent="mutate()">
 									<v-text-field v-model="product.name" label="Name"></v-text-field>
@@ -41,11 +42,6 @@
 <script>
 export default {
 	name: 'GraphQLAddProduct',
-
-	components: {
-		//
-	},
-
 	data: () => ({
 		product: {},
 		categories: [
@@ -61,9 +57,6 @@ export default {
 		},
 	},
 	methods: {
-		onDone() {
-			this.$router.push('/graphql');
-		},
 		returnHome() {
 			this.$router.push('/graphql');
 		},

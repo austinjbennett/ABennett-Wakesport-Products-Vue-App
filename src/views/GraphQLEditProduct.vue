@@ -69,11 +69,7 @@ export default {
 	},
 	methods: {
 		returnHome() {
-			console.log('Going home');
 			this.$router.push('/');
-		},
-		onDone() {
-			//
 		},
 		async deleteProduct() {
 			await this.$apollo.mutate({

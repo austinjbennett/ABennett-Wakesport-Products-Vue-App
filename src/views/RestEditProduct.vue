@@ -7,12 +7,13 @@
 					<v-card-text>
 						<v-form @submit.prevent="updateProduct">
 							<v-text-field v-model="product.title" label="Title"></v-text-field>
-							<v-text-field class="courseName" v-model="product.productCategory" label="Category"></v-text-field>
-							<v-textarea class="text--primary" v-model="product.description" label="Description"></v-textarea>
+							<v-select :items="categories" label="Category" v-model="product.productCategory"></v-select>
+							<v-textarea v-model="product.description" label="Description"></v-textarea>
 							<v-text-field v-model="product.price" prefix="$" label="Price"></v-text-field>
 							<v-text-field v-model="product.imageUrl" label="Image URL"></v-text-field>
 							<v-btn color="secondary" class="mr-6" @click="returnHome">Cancel</v-btn>
 							<v-btn type="submit" color="primary">Commit Changes</v-btn>
+							<v-btn color="error" absolute right @click="deleteProduct">Delete Product</v-btn>
 						</v-form>
 					</v-card-text>
 				</v-card>
@@ -22,44 +23,72 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
 	name: 'RestProduct.vue',
 	data() {
 		return {
 			product: {},
 			productId: this.$route.params.productId,
+			categories: [
+				'Wakeboards',
+				'Wakeboard Bindings',
+				'Life Jackets',
+				'Wakesurf Boards',
+			],
+			serverBaseUrl: 'https://abennett-crud-server.herokuapp.com/api',
 		};
 	},
 	methods: {
 		updateProduct() {
-			console.log('this.product._id', this.product._id);
-			console.log('stringified product:', JSON.stringify(this.product));
-			// fetch('http://localhost:5000/api/edit-product', {
-			axios({
+			const payload = {
+				productId: this.productId,
+				title: this.product.title,
+				productCategory: this.product.productCategory,
+				description: this.product.description,
+				price: parseInt(this.product.price, 10),
+				imageUrl: this.product.imageUrl,
+			};
+			fetch(`${this.serverBaseUrl}/edit-product/`, {
 				method: 'PUT',
-				// url: `http://localhost:5000/api/edit-product?id=${this.product._id}&title=${this.product.title}&description=${this.product.description}&category=${this.product.category}&price=${this.product.price}&imageUrl=${this.product.imageUrl}`,
-				url: 'http://localhost:5000/api/edit-product',
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
+					'Content-Type': 'application/json;charset=utf-8',
 				},
-				data: this.product,
+				body: JSON.stringify(payload),
 			})
-				// .then((response) => {
-				// 	return response.json();
-				// })
+				.then((response) => {
+					return response.json();
+				})
 				.then((data) => {
 					console.log('fetch put:', data);
 				})
 				.catch((err) => {
 					console.error('Error PUTing:', err);
 				});
-			// this.$router.push('/');
+			this.$router.push('/');
+		},
+		deleteProduct() {
+			fetch(`${this.serverBaseUrl}/delete-product`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json;charset=utf-8',
+				},
+				body: JSON.stringify({
+					productId: this.productId,
+				}),
+			})
+				.then(() => {
+					this.returnHome();
+				})
+				.catch((err) => {
+					console.error('Error Deleting Product:', err);
+				});
+		},
+		returnHome() {
+			this.$router.push('/');
 		},
 	},
 	beforeMount() {
-		fetch(`https://abennett-crud-server.herokuapp.com/api/product/${this.productId}`)
+		fetch(`${this.serverBaseUrl}/product/${this.productId}`)
 			.then((response) => {
 				return response.json();
 			})
