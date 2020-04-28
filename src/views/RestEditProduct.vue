@@ -11,9 +11,14 @@
 							<v-textarea v-model="product.description" label="Description"></v-textarea>
 							<v-text-field v-model="product.price" prefix="$" label="Price"></v-text-field>
 							<v-text-field v-model="product.imageUrl" label="Image URL"></v-text-field>
-							<v-btn color="secondary" class="mr-6" @click="returnHome">Cancel</v-btn>
-							<v-btn type="submit" color="primary">Commit Changes</v-btn>
-							<v-btn color="error" absolute right @click="deleteProduct">Delete Product</v-btn>
+							<div class="d-flex justify-sm-space-between">
+								<v-btn color="error" @click="deleteProduct">Delete Product</v-btn>
+								<div class="d-inline-block">
+									<v-btn color="secondary" class="mr-6" @click="returnHome">Cancel</v-btn>
+									<v-btn type="submit" color="primary">Commit Changes</v-btn>
+								</div>
+							</div>
+
 						</v-form>
 					</v-card-text>
 				</v-card>

@@ -37,7 +37,7 @@
 							<p class="text-center">Click To Edit</p>
 							<v-img :src="product.imageUrl"></v-img>
 							<v-card-text>
-								<div>{{ product.title }}</div>
+								<h4 class="headline black--text">{{ product.name }}</h4>
 								<p class="courseName">
 									{{ product.category }}
 								</p>
@@ -76,7 +76,7 @@
 							<p class="text-center">Click To Edit</p>
 							<v-img :src="product.imageUrl"></v-img>
 							<v-card-text>
-								<div>{{ product.title }}</div>
+								<h4 class="headline black--text">{{ product.name }}</h4>
 								<p class="courseName">
 									{{ product.category }}
 								</p>

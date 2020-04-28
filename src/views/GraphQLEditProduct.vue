@@ -9,7 +9,7 @@
 			price: sendPrice,
 			imageUrl,
 		}"
-		@done="onDone"
+		@done="returnHome"
 	>
 		<template v-slot="{ mutate, loading, error }">
 			<v-container>
@@ -24,9 +24,13 @@
 									<v-textarea class="text--primary" v-model="description" label="Description"></v-textarea>
 									<v-text-field v-model="price" prefix="$" label="Price"></v-text-field>
 									<v-text-field v-model="imageUrl" label="Image URL"></v-text-field>
-									<v-btn color="secondary" class="mr-6" :disabled="loading" @click="returnHome">Cancel</v-btn>
-									<v-btn type="submit" color="primary" :disabled="loading">Commit Changes</v-btn>
-									<v-btn color="error" absolute right :disabled="loading" @click="deleteProduct">Delete Product</v-btn>
+									<div class="d-flex justify-sm-space-between">
+										<v-btn color="error" :disabled="loading" @click="deleteProduct">Delete Product</v-btn>
+										<div class="d-inline-block">
+											<v-btn color="secondary" class="mr-6" :disabled="loading" @click="returnHome">Cancel</v-btn>
+											<v-btn type="submit" color="primary" :disabled="loading">Commit Changes</v-btn>
+										</div>
+									</div>
 									<p v-if="error">An error occurred: {{ error }}</p>
 								</v-form>
 							</v-card-text>
@@ -66,7 +70,7 @@ export default {
 	},
 	methods: {
 		returnHome() {
-			this.$router.push('/');
+			this.$router.push('/graphql');
 		},
 		async deleteProduct() {
 			await this.$apollo.mutate({

@@ -18,7 +18,7 @@
 				<p class="text-center">Click To Edit</p>
 				<v-img :src="product.imageUrl"></v-img>
 				<v-card-text>
-					<div>{{ product.title }}</div>
+					<h4 class="headline black--text">{{ product.title }}</h4>
 					<p class="courseName">
 						{{ product.productCategory }}
 					</p>

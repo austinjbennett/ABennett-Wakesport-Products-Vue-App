@@ -1,5 +1,14 @@
 # graphql-frontend
 
+###To run locally:
+```
+npm install
+npm run serve
+```
+It will run on localhost:8080 by default unless that port is taken. See your command line output after running `npm run serve`.  
+
+
+###Requirements:
 :star: Effectively use conditional logic, JavaScript array methods, and front-end framework elements to render large lists on the web client.  
 -   [x] See Repo.  
 
